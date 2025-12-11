@@ -2,16 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Os Cinéfilos</title>
     
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/860/860306.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#101010">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/860/860306.png">
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/860/860306.png">
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -20,40 +17,21 @@
         /* --- GERAL --- */
         :root { --bg: #101010; --card: #1f1f1f; --text: #e5e5e5; --accent: #e50914; --nav-bg: rgba(16, 16, 16, 0.98); --gold: #ffc107; --green: #46d369; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-top: 80px; padding-bottom: 40px; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding-top: 80px; padding-bottom: 90px; }
 
         /* --- NAVBAR --- */
         .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: var(--nav-bg); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 1000; border-bottom: 1px solid #222; }
-        .logo { font-size: 1.5em; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
-        .logo:hover { transform: scale(1.05); }
+        .logo { font-size: 1.5em; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
         .logo span { color: var(--accent); }
         .nav-links { display: flex; gap: 35px; }
         .nav-item { cursor: pointer; color: #888; font-weight: 600; font-size: 0.95em; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .nav-item:hover, .nav-item.active { color: white; }
         .nav-item.active { border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
         .user-avatar-mini { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid #333; }
-        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .page-section { display: none; animation: fadeUp 0.4s ease; }
         .page-section.active { display: block; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- DIÁRIO (Sub-Abas) --- */
-        .sub-tabs { display: flex; gap: 20px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .sub-tab-btn { background: transparent; border: none; color: #666; font-size: 1.1em; font-weight: bold; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
-        .sub-tab-btn:hover { color: #fff; }
-        .sub-tab-btn.active { color: white; border-bottom: 3px solid var(--accent); }
-        .diary-section-content { display: none; }
-        .diary-section-content.active { display: block; animation: fadeUp 0.3s; }
-
-        .diary-item { display: flex; gap: 15px; background: #1a1a1a; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid var(--accent); position: relative; }
-        .diary-poster { width: 50px; height: 75px; object-fit: cover; border-radius: 4px; }
-        .diary-info { flex-grow: 1; }
-        .diary-date { color: var(--accent); font-size: 0.8em; font-weight: bold; }
-        .diary-title { font-size: 1em; font-weight: bold; margin: 3px 0; }
-        .diary-meta { color: #888; font-size: 0.9em; margin-top: 2px; }
-        .diary-remove { position: absolute; right: 15px; top: 15px; color: #444; cursor: pointer; }
-        .diary-remove:hover { color: #d32f2f; }
 
         /* --- LOGIN --- */
         #auth-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 5000; display: flex; justify-content: center; align-items: center; flex-direction: column; background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08737b/US-en-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg'); background-size: cover; }
@@ -69,34 +47,47 @@
         .scroll-btn { position: absolute; top: 40%; transform: translateY(-50%); background: rgba(0,0,0,0.8); color: white; border: 1px solid #333; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.3s; }
         .carousel-container:hover .scroll-btn { opacity: 1; }
         .scroll-left { left: 0; } .scroll-right { right: 0; }
+        
         .card { min-width: 160px; width: 160px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #1a1a1a; flex-shrink: 0; transition: 0.3s; }
+        .card:hover { transform: scale(1.05); z-index: 2; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .card img { width: 100%; height: 240px; object-fit: cover; }
         .rating-badge { position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.8); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-size: 0.8em; font-weight: bold; backdrop-filter: blur(2px); }
 
-        /* Busca */
         .search-hero { margin: 30px auto; max-width: 600px; display: flex; gap: 10px; }
         input.search-input { flex-grow: 1; padding: 15px 20px; font-size: 1.1em; background: #222; border: 1px solid #333; color: white; border-radius: 50px; outline: none; }
-        .search-btn-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--accent); border: none; color: white; cursor: pointer; font-size: 1.2em; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .search-btn-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--accent); border: none; color: white; cursor: pointer; font-size: 1.2em; display: flex; align-items: center; justify-content: center; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
 
-        /* --- PERFIL --- */
-        .profile-card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
-        .profile-cover { height: 180px; background-size: cover; background-position: center; position: relative; background-color: #333; }
-        .profile-info { padding: 0 30px 30px 30px; position: relative; display: flex; flex-direction: column; align-items: center; margin-top: -60px; }
-        .profile-avatar-large { width: 120px; height: 120px; border-radius: 50%; border: 5px solid var(--card); object-fit: cover; background: #000; }
-        .profile-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 600px; margin-top: 20px; }
-        .form-group { display: flex; flex-direction: column; gap: 5px; text-align: left; }
-        .form-group input { background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 6px; }
-        .avatar-options { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
-        .avatar-opt { width: 45px; height: 45px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; opacity: 0.6; }
-        .avatar-opt:hover { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
+        /* --- DIÁRIO --- */
+        .sub-tabs { display: flex; gap: 20px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .sub-tab-btn { background: transparent; border: none; color: #666; font-size: 1.1em; font-weight: bold; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
+        .sub-tab-btn:hover { color: #fff; }
+        .sub-tab-btn.active { color: white; border-bottom: 3px solid var(--accent); }
+        .diary-section-content { display: none; }
+        .diary-section-content.active { display: block; animation: fadeUp 0.3s; }
 
-        /* --- STATS --- */
+        .diary-item { display: flex; gap: 15px; background: #1a1a1a; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid var(--accent); position: relative; }
+        .diary-poster { width: 50px; height: 75px; object-fit: cover; border-radius: 4px; cursor: pointer; }
+        .diary-info { flex-grow: 1; }
+        .diary-date { color: var(--accent); font-size: 0.8em; font-weight: bold; }
+        .diary-title { font-size: 1em; font-weight: bold; margin: 3px 0; cursor: pointer;}
+        .diary-meta { color: #777; font-size: 0.9em; }
+        .diary-remove { position: absolute; right: 15px; top: 15px; color: #444; cursor: pointer; }
+        .diary-remove:hover { color: #d32f2f; }
+
+        /* --- METRICAS --- */
         .metrics-split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .stat-box { background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+        .stat-box { background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: 0.2s; }
+        .stat-box:hover { border-color: var(--accent); background: #222; }
         .stat-value { font-size: 2em; font-weight: 800; color: white; }
         .stat-label { color: #666; font-size: 0.9em; text-transform: uppercase; }
         .stat-icon { font-size: 2em; color: #333; }
+
+        /* DETALHES DE MÉTRICAS (NOVO) */
+        .stats-controls { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+        .stats-filter-select { background: #222; color: white; border: 1px solid #333; padding: 8px; border-radius: 5px; }
+        .stats-back-btn { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; color: #aaa; margin-bottom: 20px; }
+        .stats-back-btn:hover { color: white; }
 
         /* --- MODAL --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
@@ -107,6 +98,7 @@
         .modal-info h2 { margin: 0 0 5px 0; font-size: 1.8em; line-height: 1.2; }
         .action-row { display: flex; gap: 15px; margin-top: 15px; align-items: center; border-top: 1px solid #333; padding-top: 15px; }
         .watched-toggle { background: #333; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.9em; transition: 0.2s; border: 1px solid #444; }
+        .watched-toggle:hover { background: #444; }
         .watched-toggle.active { color: var(--green); border-color: var(--green); background: rgba(70, 211, 105, 0.1); }
 
         /* Modal Data */
@@ -143,24 +135,31 @@
         .comment-input-area { background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; margin-bottom: 30px; }
         .star-rating { display: flex; justify-content: center; gap: 15px; font-size: 30px; color: #333; cursor: pointer; margin-bottom: 15px; }
         .star-rating i.filled { color: var(--gold); }
-        textarea { width: 100%; height: 90px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; padding: 15px; resize: none; font-family: inherit; }
+        textarea { width: 100%; height: 90px; background: #111; border: 1px solid #333; color: white; border-radius: 8px; padding: 15px; resize: none; font-family: inherit; font-size: 1em; }
+        textarea:focus { outline: none; border-color: var(--accent); }
         .review-box { background: #222; padding: 20px; border-radius: 8px; margin-bottom: 15px; position: relative; }
         .review-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9em; color: #aaa; }
+        .user-badge { display: flex; align-items: center; gap: 10px; color: white; font-weight: bold; }
         .delete-btn { cursor: pointer; color: #555; } .delete-btn:hover { color: #d32f2f; }
 
-        /* --- MOBILE --- */
+        /* --- PERFIL --- */
+        .profile-card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
+        .profile-cover { height: 180px; background-size: cover; background-position: center; position: relative; background-color: #333; }
+        .profile-info { padding: 0 30px 30px 30px; position: relative; display: flex; flex-direction: column; align-items: center; margin-top: -60px; }
+        .profile-avatar-large { width: 120px; height: 120px; border-radius: 50%; border: 5px solid var(--card); object-fit: cover; background: #000; }
+        .profile-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 600px; margin-top: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; text-align: left; }
+        .form-group input { background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 6px; }
+        .avatar-options { display: flex; gap: 15px; justify-content: center; margin-top: 10px; }
+        .avatar-opt { width: 45px; height: 45px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; opacity: 0.6; }
+        .avatar-opt:hover { opacity: 1; border-color: var(--accent); transform: scale(1.1); }
+
         @media (max-width: 768px) {
-            body { padding-top: 0; padding-bottom: 80px; }
-            .navbar { 
-                top: auto; bottom: 0; height: 80px; /* Mais altura */
-                padding: 10px 0 25px 0; /* Espaço para barra de home do iPhone */
-                justify-content: space-around; border-top: 1px solid #222; 
-                align-items: flex-start;
-            }
+            .navbar { top: auto; bottom: 0; height: 75px; padding: 10px 0 20px 0; justify-content: space-around; border-top: 1px solid #222; align-items: flex-start; }
             .logo, .nav-links span { display: none; }
             .nav-links { width: 100%; justify-content: space-around; }
             .nav-item { flex-direction: column; font-size: 0.7em; }
-            .nav-item i { font-size: 1.6em; margin-bottom: 5px; }
+            .nav-item i { font-size: 1.5em; margin-bottom: 4px; }
             .modal-header { flex-direction: column; text-align: center; }
             .modal-poster { margin: 0 auto; }
             .metrics-split { grid-template-columns: 1fr; }
@@ -243,15 +242,54 @@
                 <div class="metrics-split">
                     <div class="metric-group">
                         <h3>🎬 Filmes</h3>
-                        <div class="stat-box" onclick="showStatDetails('movie')"><div class="stat-value" id="statMovies">0</div><div class="stat-label">Total</div><i class="fa-solid fa-film stat-icon"></i></div>
-                        <div class="stat-box"><div class="stat-value" id="statHoursMovies">0</div><div class="stat-label">Horas</div><i class="fa-solid fa-clock stat-icon"></i></div>
+                        <div class="stat-box" onclick="openDetailedStats('movie')">
+                            <div class="stat-value" id="statMovies">0</div>
+                            <div class="stat-label">Total</div>
+                            <i class="fa-solid fa-film stat-icon"></i>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="statHoursMovies">0</div>
+                            <div class="stat-label">Horas</div>
+                            <i class="fa-solid fa-clock stat-icon"></i>
+                        </div>
                     </div>
                     <div class="metric-group">
                         <h3>📺 Séries</h3>
-                        <div class="stat-box" onclick="showStatDetails('tv')"><div class="stat-value" id="statSeries">0</div><div class="stat-label">Séries</div><i class="fa-solid fa-tv stat-icon"></i></div>
-                        <div class="stat-box"><div class="stat-value" id="statEpisodes">0</div><div class="stat-label">Episódios</div><i class="fa-solid fa-list-ol stat-icon"></i></div>
+                        <div class="stat-box" onclick="openDetailedStats('tv')">
+                            <div class="stat-value" id="statSeries">0</div>
+                            <div class="stat-label">Séries</div>
+                            <i class="fa-solid fa-tv stat-icon"></i>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="statEpisodes">0</div>
+                            <div class="stat-label">Episódios</div>
+                            <i class="fa-solid fa-list-ol stat-icon"></i>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="statHoursSeries">0</div>
+                            <div class="stat-label">Horas</div>
+                            <i class="fa-solid fa-hourglass-half stat-icon"></i>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="page-stats-details" class="page-section">
+                <div class="stats-back-btn" onclick="closeDetailedStats()"><i class="fa-solid fa-arrow-left"></i> Voltar</div>
+                <h2 id="statsDetailTitle">Detalhes</h2>
+                
+                <div style="max-width: 400px; margin: 0 auto 30px auto;">
+                    <canvas id="detailChart"></canvas>
+                </div>
+
+                <div class="stats-controls">
+                    <select id="sortFilter" class="stats-filter-select" onchange="filterStatsList()">
+                        <option value="dateDesc">Mais Recentes</option>
+                        <option value="dateAsc">Mais Antigos</option>
+                    </select>
+                </div>
+
+                <div class="grid" id="statsDetailGrid"></div>
             </div>
 
             <div id="page-profile" class="page-section">
@@ -331,6 +369,7 @@
     let watchedSet = new Set();
     let backupModalFilme = "";
     let pendingWatchAction = null; 
+    let currentStatsData = []; // Para filtros de métricas
 
     // --- AUTH ---
     async function init() {
@@ -378,6 +417,10 @@
         document.querySelectorAll('.nav-item, .page-section').forEach(e => e.classList.remove('active'));
         document.getElementById(`nav-${p}`).classList.add('active');
         document.getElementById(`page-${p}`).classList.add('active');
+        
+        // Fecha detalhe de stats se estiver aberto
+        document.getElementById('page-stats-details').classList.remove('active'); 
+        
         if(p==='diary') loadDiary();
         if(p==='stats') calculateStats();
     }
@@ -460,7 +503,7 @@
         } catch (e) { body.innerHTML = "<p>Erro ao carregar.</p>"; }
     }
 
-    // --- WATCHED WITH DATE ---
+    // --- LÓGICA DE DATA ---
     async function toggleWatch(id, type, runtime, btn, s=null, ep=null) {
         if(isGuest) return alert("Faça login para salvar.");
         
@@ -468,25 +511,19 @@
         const isWatched = watchedSet.has(key);
 
         if(isWatched) {
-            // Se já viu, remove direto
             watchedSet.delete(key);
             let q = supabase.from('watched').delete().eq('user_id', currentUser.id).eq('tmdb_id', id).eq('media_type', type);
             if(s) q = q.eq('season_number', s).eq('episode_number', ep);
             await q;
-            
             if(btn) {
                 btn.classList.remove('active');
                 if(type==='movie') btn.innerHTML = '<i class="fa-solid fa-eye"></i> Marcar Visto';
             }
         } else {
-            // Se NÃO viu, abre modal de data
             pendingWatchAction = { id, type, runtime, btn, s, ep, key };
-            
-            // Preenche data atual por padrão
             const now = new Date();
             document.getElementById('watchDate').valueAsDate = now;
             document.getElementById('watchTime').value = now.toTimeString().substring(0,5);
-            
             document.getElementById('dateModal').style.display = 'flex';
         }
     }
@@ -498,18 +535,24 @@
         const fullDate = new Date(`${dateVal}T${timeVal}`);
         
         watchedSet.add(key);
-        const obj = { user_id: currentUser.id, tmdb_id: id, media_type: type, runtime: runtime, created_at: fullDate.toISOString() };
+        const obj = { 
+            user_id: currentUser.id, tmdb_id: id, media_type: type, 
+            runtime: runtime, created_at: fullDate.toISOString() 
+        };
         if(s) { obj.season_number = s; obj.episode_number = ep; }
         
         await supabase.from('watched').insert([obj]);
-        if(btn) { btn.classList.add('active'); if(type==='movie') btn.innerHTML = '<i class="fa-solid fa-eye"></i> Visto'; }
         
+        if(btn) {
+            btn.classList.add('active');
+            if(type==='movie') btn.innerHTML = '<i class="fa-solid fa-eye"></i> Visto';
+        }
         closeDateModal();
     }
 
     function closeDateModal() { document.getElementById('dateModal').style.display = 'none'; pendingWatchAction = null; }
 
-    // --- SÉRIES LÓGICA ---
+    // --- SÉRIES ---
     async function loadSeason(tvId, s) {
         const div = document.getElementById(`season-${s}`);
         const icon = div.previousElementSibling.querySelector('.season-btn i');
@@ -543,7 +586,7 @@
         }
     }
 
-    // --- BIO PESSOA ---
+    // --- BIO ---
     async function verPessoa(id) {
         const c = document.getElementById('modalBody');
         c.innerHTML = "<p style='padding:30px'>Carregando bio...</p>";
@@ -556,7 +599,7 @@
     }
     function voltarFilme() { document.getElementById('modalBody').innerHTML = backupModalFilme; document.getElementById('reviewsSection').style.display='block'; }
 
-    // --- DIARIO (NOVO: AGRUPAMENTO SÉRIES) ---
+    // --- DIARIO (AGRUPADO) ---
     function switchDiaryTab(type, btn) {
         document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -572,35 +615,34 @@
         const cSeries = document.getElementById('diary-series-container');
         cMovies.innerHTML = ""; cSeries.innerHTML = "";
         
-        // Map para agrupar séries
         let seriesMap = {}; 
 
         for(let i of data) {
-            // Se for série, processa para agrupar
+            // Se for série, agrupa
             if(i.media_type === 'tv') {
                 if(!seriesMap[i.tmdb_id]) {
-                    // Fetch apenas se for a primeira vez que vemos essa série no loop
                     const res = await fetch(`${BASE_URL}/tv/${i.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
                     const m = await res.json();
                     seriesMap[i.tmdb_id] = { meta: m, latest: i };
                 } else {
-                    // Verifica se esse episódio é mais recente (maior temp ou maior ep na mesma temp)
                     const old = seriesMap[i.tmdb_id].latest;
+                    // Lógica para encontrar o episódio mais recente visto
                     if(i.season_number > old.season_number || (i.season_number == old.season_number && i.episode_number > old.episode_number)) {
                         seriesMap[i.tmdb_id].latest = i;
                     }
                 }
             } else {
-                // Filmes renderiza direto
+                // Filmes
                 const res = await fetch(`${BASE_URL}/movie/${i.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
                 const m = await res.json();
                 const dateStr = new Date(i.created_at).toLocaleDateString('pt-BR');
+                
                 cMovies.innerHTML += `
                     <div class="diary-item">
-                        <img src="${IMG_URL+m.poster_path}" class="diary-poster">
+                        <img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','movie')">
                         <div class="diary-info">
                             <div class="diary-date">${dateStr}</div>
-                            <div class="diary-title">${m.title}</div>
+                            <div class="diary-title" onclick="abrirModal('${i.tmdb_id}','movie')">${m.title}</div>
                             <div class="diary-meta">Filme • ${i.runtime}m</div>
                         </div>
                         <i class="fa-solid fa-trash diary-remove" onclick="toggleWatch('${i.tmdb_id}','movie',0,null);this.parentElement.remove()"></i>
@@ -608,17 +650,18 @@
             }
         }
 
-        // Renderiza as séries agrupadas
+        // Renderiza Séries Agrupadas
         for (const [id, data] of Object.entries(seriesMap)) {
             const i = data.latest;
             const m = data.meta;
             const dateStr = new Date(i.created_at).toLocaleDateString('pt-BR');
+            
             cSeries.innerHTML += `
                 <div class="diary-item">
-                    <img src="${IMG_URL+m.poster_path}" class="diary-poster">
+                    <img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','tv')">
                     <div class="diary-info">
-                        <div class="diary-date">Visto em: ${dateStr}</div>
-                        <div class="diary-title">${m.name}</div>
+                        <div class="diary-date">Último visto: ${dateStr}</div>
+                        <div class="diary-title" onclick="abrirModal('${i.tmdb_id}','tv')">${m.name}</div>
                         <div class="diary-meta" style="color:var(--gold)">Parou em: T${i.season_number} E${i.episode_number}</div>
                     </div>
                 </div>`;
@@ -627,30 +670,86 @@
         switchDiaryTab('movies', document.querySelector('.sub-tab-btn'));
     }
 
-    // LISTAR DETALHES DE STATS
-    async function showStatDetails(type) {
+    // --- DETALHES DE MÉTRICAS (INTERATIVO) ---
+    async function openDetailedStats(type) {
         if(isGuest) return;
-        const modal = document.getElementById('modalDetalhes');
-        const body = document.getElementById('modalBody');
-        modal.style.display = 'flex';
-        body.innerHTML = "<p style='padding:20px'>Carregando lista...</p>";
-        document.getElementById('reviewsSection').style.display='none'; 
+        
+        // Esconde principal, mostra detalhe
+        document.getElementById('page-stats').classList.remove('active');
+        document.getElementById('page-stats-details').classList.add('active');
+        document.getElementById('statsDetailTitle').innerText = type === 'movie' ? 'Histórico de Filmes' : 'Histórico de Séries';
+        
+        const grid = document.getElementById('statsDetailGrid');
+        grid.innerHTML = "<p>Carregando dados...</p>";
 
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id).eq('media_type', type).order('created_at', {ascending: false});
+        currentStatsData = data; // Salva para filtro
         
-        if(!data || data.length === 0) { body.innerHTML = "<p style='padding:20px'>Nenhum item encontrado.</p>"; return; }
+        renderStatsGrid(data, type);
+        renderStatsChart(data, type);
+    }
 
-        let html = `<div style="padding:20px;"><h3>Histórico de ${type === 'movie' ? 'Filmes' : 'Séries'}</h3>`;
-        for(let item of data.slice(0, 30)) { // Limite 30 para performance
-             const res = await fetch(`${BASE_URL}/${item.media_type}/${item.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
+    function closeDetailedStats() {
+        document.getElementById('page-stats-details').classList.remove('active');
+        document.getElementById('page-stats').classList.add('active');
+    }
+
+    async function renderStatsGrid(data, type) {
+        const grid = document.getElementById('statsDetailGrid');
+        grid.innerHTML = "";
+        
+        // Renderiza cards (Limitado a 50 para performance inicial)
+        for(let item of data.slice(0, 50)) {
+             const res = await fetch(`${BASE_URL}/${type}/${item.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
              const m = await res.json();
-             const label = type === 'movie' ? '' : `(S${item.season_number} E${item.episode_number})`;
-             html += `<div style="padding:10px; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-weight:bold">${m.title||m.name} ${label}</span> 
-                        <span style="color:#666; font-size:0.8em">${new Date(item.created_at).toLocaleDateString('pt-BR')}</span>
-                      </div>`;
+             
+             // Para série mostramos qual ep foi visto nesse registro
+             const label = type === 'tv' ? `<div class="rating-badge" style="bottom:5px; top:auto; font-size:0.7em">S${item.season_number} E${item.episode_number}</div>` : '';
+             
+             grid.innerHTML += `
+                <div class="card" onclick="abrirModal('${item.tmdb_id}','${type}')">
+                    <img src="${IMG_URL+m.poster_path}">
+                    ${label}
+                </div>`;
         }
-        body.innerHTML = html + "</div>";
+    }
+
+    function renderStatsChart(data, type) {
+        // Exemplo simples: Filmes por Mês
+        const months = {};
+        data.forEach(item => {
+            const date = new Date(item.created_at);
+            const key = date.toLocaleString('default', { month: 'short' });
+            months[key] = (months[key] || 0) + 1;
+        });
+
+        const ctx = document.getElementById('detailChart');
+        // Destruir gráfico anterior se existir
+        if(window.myDetailChart) window.myDetailChart.destroy();
+
+        window.myDetailChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(months),
+                datasets: [{
+                    label: 'Assistidos',
+                    data: Object.values(months),
+                    backgroundColor: '#e50914'
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { display: false } } }
+            }
+        });
+    }
+
+    function filterStatsList() {
+        const sort = document.getElementById('sortFilter').value;
+        let sorted = [...currentStatsData];
+        if(sort === 'dateAsc') sorted.reverse();
+        // Pode adicionar mais lógica de sort aqui
+        renderStatsGrid(sorted, sorted[0]?.media_type || 'movie');
     }
 
     // --- REVIEWS & RESTO ---
