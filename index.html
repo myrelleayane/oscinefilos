@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Os Cinéfilos</title>
     
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/860/860306.png">
@@ -22,7 +22,7 @@
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 
-        /* Navbar */
+        /* Navbar (Desktop) */
         .navbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: var(--nav-bg); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 1000; border-bottom: 1px solid #222; }
         .logo { font-size: 1.5em; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
         .logo span { color: var(--accent); }
@@ -31,6 +31,12 @@
         .nav-item:hover, .nav-item.active { color: white; }
         .nav-item.active { border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
         .user-avatar-mini { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid #333; }
+        
+        /* Mobile Top Bar (Novo) */
+        .mobile-logo-bar { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: var(--nav-bg); z-index: 1001; align-items: center; justify-content: center; border-bottom: 1px solid #222; backdrop-filter: blur(10px); }
+        .mobile-logo { font-size: 1.2em; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .mobile-logo span { color: var(--accent); }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .page-section { display: none; animation: fadeUp 0.4s ease; }
         .page-section.active { display: block; }
@@ -44,7 +50,7 @@
         .btn-main:hover { background: #b20710; }
         .btn-guest { background: transparent; border: 1px solid #555; color: #ccc; margin-top: 10px; width: 100%; padding: 10px; cursor: pointer; }
 
-        /* Cards & Carrossel */
+        /* UI Components */
         h2 { font-weight: 700; margin: 40px 0 20px 0; border-left: 4px solid var(--accent); padding-left: 15px; font-size: 1.4em; }
         .carousel-container { position: relative; }
         .horizontal-scroll { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 20px; scroll-behavior: smooth; scrollbar-width: none; }
@@ -75,7 +81,6 @@
         .sub-tab-btn:hover, .sub-tab-btn.active { color: white; border-bottom: 3px solid var(--accent); }
         .diary-section-content { display: none; }
         .diary-section-content.active { display: block; animation: fadeUp 0.3s; }
-
         .diary-item { display: flex; gap: 15px; background: #1a1a1a; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid var(--accent); position: relative; }
         .diary-poster { width: 50px; height: 75px; object-fit: cover; border-radius: 4px; cursor: pointer; }
         .diary-info { flex-grow: 1; }
@@ -85,11 +90,13 @@
         .diary-remove { position: absolute; right: 15px; top: 15px; color: #444; cursor: pointer; }
         .diary-remove:hover { color: #d32f2f; }
 
-        /* Listas Modal */
-        .list-options { display: none; position: absolute; background: #222; border: 1px solid #444; border-radius: 8px; padding: 10px; z-index: 50; top: 100%; right: 0; min-width: 200px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .list-option-item { padding: 10px; cursor: pointer; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        /* Listas Modal (Dropdown) */
+        .list-options { display: none; position: absolute; background: #222; border: 1px solid #444; border-radius: 8px; padding: 0; z-index: 50; top: 100%; right: 0; min-width: 240px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; }
+        .list-option-item { padding: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
         .list-option-item:hover { background: #333; }
-        .new-list-input { width: 100%; background: #111; border: 1px solid #444; color: white; padding: 8px; border-radius: 4px; margin-top: 5px; }
+        .list-create-area { padding: 10px; background: #1a1a1a; display: flex; gap: 5px; }
+        .new-list-input { flex-grow: 1; background: #111; border: 1px solid #444; color: white; padding: 8px; border-radius: 4px; font-size: 0.9em; }
+        .new-list-btn { background: var(--accent); border: none; color: white; width: 30px; border-radius: 4px; cursor: pointer; }
 
         /* Stats */
         .metrics-split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -98,10 +105,9 @@
         .stat-value { font-size: 2em; font-weight: 800; color: white; }
         .stat-label { color: #666; font-size: 0.9em; text-transform: uppercase; }
         .stat-icon { font-size: 2em; color: #333; }
-        
         #page-stats-details .btn-back-modal { display: inline-flex; margin-bottom: 20px; align-items: center; gap: 5px; }
 
-        /* Modal */
+        /* Modal Principal */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: #181818; width: 95%; max-width: 900px; max-height: 95vh; overflow-y: auto; border-radius: 12px; padding: 0; position: relative; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10; background: rgba(0,0,0,0.5); width: 35px; height: 35px; border-radius: 50%; text-align: center; line-height: 35px; }
@@ -141,9 +147,13 @@
         .actor img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #333; margin-bottom: 5px; }
         .actor p { font-size: 0.8em; text-align: center; color: #ccc; margin: 0; max-width: 80px; overflow: hidden; text-overflow: ellipsis; }
         
+        /* Person Bio + Filmografia */
         .person-view-header { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 20px; }
         .person-view-header img { width: 120px; height: 180px; object-fit: cover; border-radius: 5px; }
         .btn-back-modal { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-bottom: 10px; }
+        .filmography-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
+        .filmography-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .filmography-item img:hover { transform: scale(1.05); }
 
         /* Comentários */
         .reviews-section { padding: 30px; background: #111; border-top: 1px solid #222; }
@@ -155,8 +165,7 @@
         .review-box { background: #222; padding: 20px; border-radius: 8px; margin-bottom: 15px; position: relative; }
         .review-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9em; color: #aaa; }
         .user-badge { display: flex; align-items: center; gap: 10px; color: white; font-weight: bold; }
-        .delete-btn { cursor: pointer; color: #555; transition: 0.2s; }
-        .delete-btn:hover { color: #d32f2f; }
+        .delete-btn { cursor: pointer; color: #555; } .delete-btn:hover { color: #d32f2f; }
 
         /* Perfil */
         .profile-card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid #333; margin-bottom: 20px; }
@@ -176,7 +185,8 @@
 
         /* Mobile */
         @media (max-width: 768px) {
-            .navbar { top: auto; bottom: 0; height: 75px; padding: 10px 0 20px 0; justify-content: space-around; border-top: 1px solid #222; align-items: flex-start; }
+            body { padding-top: 60px; padding-bottom: 80px; } /* Ajuste pro topbar */
+            .navbar { top: auto; bottom: 0; height: 75px; padding: 10px 0 20px 0; justify-content: space-around; border-top: 1px solid #222; align-items: flex-start; z-index: 2000; }
             .logo, .nav-links span { display: none; }
             .nav-links { width: 100%; justify-content: space-around; }
             .nav-item { flex-direction: column; font-size: 0.7em; }
@@ -186,10 +196,15 @@
             .metrics-split { grid-template-columns: 1fr; }
             .profile-edit-grid { grid-template-columns: 1fr; }
             .scroll-btn { display: none; }
+            .mobile-logo-bar { display: flex; } /* Mostra no mobile */
         }
     </style>
 </head>
 <body>
+
+    <div class="mobile-logo-bar">
+        <div class="mobile-logo">Os <span>Cinéfilos</span></div>
+    </div>
 
     <div id="auth-screen">
         <h1 style="text-transform: uppercase; letter-spacing: 3px; font-size: 2.5em; margin-bottom: 20px;">Os <span style="color:var(--accent)">Cinéfilos</span></h1>
@@ -260,25 +275,13 @@
             </div>
 
             <div id="page-search" class="page-section">
-                <div class="search-container">
-                    <div class="search-hero">
-                        <input type="text" id="searchInput" class="search-input" placeholder="Digite o nome..." oninput="liveSearch()">
-                        <button class="search-btn-icon" onclick="buscar()"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                    <div class="search-filters">
-                        <select id="filterType" class="filter-select" onchange="liveSearch()">
-                            <option value="multi">Tudo</option>
-                            <option value="movie">Filmes</option>
-                            <option value="tv">Séries</option>
-                        </select>
-                        <select id="filterYear" class="filter-select" onchange="liveSearch()">
-                            <option value="">Qualquer Ano</option>
-                            <option value="2025">2025</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="old">Antigos</option>
-                        </select>
-                    </div>
+                <div class="search-hero">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Digite o nome..." oninput="liveSearch()">
+                    <button class="search-btn-icon" onclick="buscar()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <div class="search-filters">
+                    <select id="filterType" class="filter-select" onchange="liveSearch()"><option value="multi">Tudo</option><option value="movie">Filmes</option><option value="tv">Séries</option></select>
+                    <select id="filterYear" class="filter-select" onchange="liveSearch()"><option value="">Ano</option><option value="2025">2025</option><option value="2024">2024</option><option value="old">Antigos</option></select>
                 </div>
                 <div class="grid" id="gridBusca"></div>
             </div>
@@ -286,8 +289,8 @@
             <div id="page-lists" class="page-section">
                 <h2>Minhas Coleções</h2>
                 <div class="sub-tabs" id="listsTabs">
-                    <button class="sub-tab-btn active" onclick="switchDiaryTab('movies', this)">🎬 Filmes</button>
-                    <button class="sub-tab-btn" onclick="switchDiaryTab('series', this)">📺 Séries</button>
+                    <button class="sub-tab-btn active" onclick="loadDiary()">Histórico (Filmes)</button>
+                    <button class="sub-tab-btn" onclick="loadDiarySeries()">Histórico (Séries)</button>
                     <button class="sub-tab-btn" onclick="loadUserList('quero-ver')">Quero Ver</button>
                     <button class="sub-tab-btn" style="color:var(--accent)" onclick="createNewList()">+ Criar Lista</button>
                 </div>
@@ -302,32 +305,22 @@
                     <div class="metric-group">
                         <h3>🎬 Filmes</h3>
                         <div class="stat-box" onclick="openDetailedStats('movie')">
-                            <div class="stat-value" id="statMovies">0</div>
-                            <div class="stat-label">Total</div>
-                            <i class="fa-solid fa-film stat-icon"></i>
+                            <div class="stat-value" id="statMovies">0</div><div class="stat-label">Total</div><i class="fa-solid fa-film stat-icon"></i>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="statHoursMovies">0</div>
-                            <div class="stat-label">Horas</div>
-                            <i class="fa-solid fa-clock stat-icon"></i>
+                            <div class="stat-value" id="statHoursMovies">0</div><div class="stat-label">Horas</div><i class="fa-solid fa-clock stat-icon"></i>
                         </div>
                     </div>
                     <div class="metric-group">
                         <h3>📺 Séries</h3>
                         <div class="stat-box" onclick="openDetailedStats('tv')">
-                            <div class="stat-value" id="statSeries">0</div>
-                            <div class="stat-label">Séries</div>
-                            <i class="fa-solid fa-tv stat-icon"></i>
+                            <div class="stat-value" id="statSeries">0</div><div class="stat-label">Séries</div><i class="fa-solid fa-tv stat-icon"></i>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="statEpisodes">0</div>
-                            <div class="stat-label">Episódios</div>
-                            <i class="fa-solid fa-list-ol stat-icon"></i>
+                            <div class="stat-value" id="statEpisodes">0</div><div class="stat-label">Episódios</div><i class="fa-solid fa-list-ol stat-icon"></i>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-value" id="statHoursSeries">0</div>
-                            <div class="stat-label">Horas</div>
-                            <i class="fa-solid fa-hourglass-half stat-icon"></i>
+                            <div class="stat-value" id="statHoursSeries">0</div><div class="stat-label">Horas</div><i class="fa-solid fa-hourglass-half stat-icon"></i>
                         </div>
                     </div>
                 </div>
@@ -359,8 +352,8 @@
                             <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" class="avatar-opt" onclick="selectAvatar(this.src)">
                             <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" class="avatar-opt" onclick="selectAvatar(this.src)">
                         </div>
-                        <button class="btn-main" onclick="salvarPerfil()" style="margin-top:20px; width:200px;">SALVAR</button>
-                        <button class="btn-guest" onclick="logout()" style="margin-top:10px; width:200px; color:#d32f2f; border:none;">Sair</button>
+                        <button class="btn-main" onclick="salvarPerfil()" style="margin-top:20px; width:200px;">SALVAR ALTERAÇÕES</button>
+                        <button class="btn-guest" onclick="logout()" style="margin-top:10px; width:200px; color:#d32f2f; border:none;">Sair da Conta</button>
                     </div>
                 </div>
             </div>
@@ -444,8 +437,7 @@
         }
         if (data.user) { currentUser = data.user; await loadUserData(); mostrarApp(); }
     }
-
-    function entrarComoVisitante() { isGuest = true; currentUser = { id: 'guest' }; mostrarApp(); }
+    function entrarComoVisitante() { isGuest=true; currentUser={id:'guest'}; mostrarApp(); }
     async function logout() { await supabase.auth.signOut(); window.location.reload(); }
     function mostrarApp() { document.getElementById('auth-screen').style.display = 'none'; document.getElementById('app-screen').style.display = 'block'; loadHome(); }
 
@@ -453,13 +445,12 @@
         if(isGuest) return;
         const { data: profile } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
         if(profile) {
-            const nome = profile.username || "Usuário";
             document.getElementById('nav-avatar').src = profile.avatar_url;
-            document.getElementById('nav-profile-name').innerText = nome;
+            document.getElementById('nav-profile-name').innerText = profile.username || "Eu";
             document.getElementById('profile-img-preview').src = profile.avatar_url;
             document.getElementById('profile-cover-bg').style.backgroundImage = `url('${profile.banner_url}')`;
-            document.getElementById('profile-name-display').innerText = nome;
-            document.getElementById('pf-name').value = nome;
+            document.getElementById('profile-name-display').innerText = profile.username;
+            document.getElementById('pf-name').value = profile.username;
             document.getElementById('pf-avatar').value = profile.avatar_url;
             document.getElementById('pf-banner').value = profile.banner_url;
         }
@@ -473,7 +464,7 @@
         document.querySelectorAll('.nav-item, .page-section').forEach(e => e.classList.remove('active'));
         document.getElementById(`nav-${p}`).classList.add('active');
         document.getElementById(`page-${p}`).classList.add('active');
-        document.getElementById('page-stats-details').classList.remove('active'); // Garante que stats fecha
+        document.getElementById('page-stats-details').classList.remove('active');
         if(p==='lists') loadDiary(); 
         if(p==='stats') calculateStats();
     }
@@ -498,26 +489,11 @@
     function liveSearch() { clearTimeout(debounceTimer); debounceTimer = setTimeout(buscar, 500); }
     async function buscar() {
         const termo = document.getElementById('searchInput').value;
-        const type = document.getElementById('filterType').value;
-        const year = document.getElementById('filterYear').value;
-        const grid = document.getElementById('gridBusca');
-        
-        if(!termo) { grid.innerHTML=""; return; }
-        let url = `${BASE_URL}/search/${type}?api_key=${TMDB_KEY}&language=pt-BR&query=${termo}`;
-        if(year && year !== 'old') url += `&primary_release_year=${year}`;
-
-        const res = await fetch(url);
-        const data = await res.json();
-        grid.innerHTML = "";
-        
-        if(!data.results.length) grid.innerHTML = "<p style='padding:20px; color:#666'>Nada encontrado.</p>";
-
-        data.results.forEach(i => {
-            if(i.poster_path) {
-                const tipoReal = i.media_type || (i.title ? 'movie' : 'tv');
-                grid.innerHTML += `<div class="card" onclick="abrirModal('${i.id}','${tipoReal}')"><img src="${IMG_URL+i.poster_path}"><div class="rating-badge">★ ${i.vote_average.toFixed(1)}</div></div>`;
-            }
-        });
+        if(!termo) { document.getElementById('gridBusca').innerHTML=""; return; }
+        const r = await fetch(`${BASE_URL}/search/multi?api_key=${TMDB_KEY}&language=pt-BR&query=${termo}`);
+        const d = await r.json();
+        const g = document.getElementById('gridBusca'); g.innerHTML="";
+        d.results.forEach(i=>{if(i.poster_path) g.innerHTML+=`<div class="card" onclick="abrirModal('${i.id}','${i.media_type}')"><img src="${IMG_URL+i.poster_path}"></div>`});
     }
 
     // --- MODAL ---
@@ -589,7 +565,7 @@
         } catch (e) { body.innerHTML = "<p>Erro ao carregar.</p>"; }
     }
 
-    // --- SÉRIES LÓGICA ---
+    // --- SÉRIES ---
     async function loadSeason(tvId, s) {
         const div = document.getElementById(`season-${s}`);
         const icon = div.previousElementSibling.querySelector('.season-btn i');
@@ -623,76 +599,131 @@
         }
     }
 
-    // --- BIO ---
+    // --- BIO PESSOA & FILMOGRAFIA ---
     async function verPessoa(id) {
         const c = document.getElementById('modalBody');
-        c.innerHTML = "<p style='padding:30px'>Carregando bio...</p>";
+        c.innerHTML = "<p style='padding:30px'>Carregando...</p>";
         document.getElementById('reviewsSection').style.display='none';
         try {
-            const r = await fetch(`${BASE_URL}/person/${id}?api_key=${TMDB_KEY}&language=pt-BR`);
-            const d = await r.json();
-            c.innerHTML = `<div style="padding:20px;"><button class="btn-back-modal" onclick="voltarFilme()"><i class="fa-solid fa-arrow-left"></i> Voltar</button><div class="person-view-header"><img src="${d.profile_path?IMG_URL+d.profile_path:'https://via.placeholder.com/100'}" style="width:120px; border-radius:50%"><div><h2 style="margin:0">${d.name}</h2><p style="color:#888">${d.place_of_birth||''}</p></div></div><div class="person-bio" style="margin-top:20px; color:#ccc; line-height:1.6">${d.biography||'Biografia indisponível.'}</div></div>`;
+            const [rBio, rCredits] = await Promise.all([
+                fetch(`${BASE_URL}/person/${id}?api_key=${TMDB_KEY}&language=pt-BR`),
+                fetch(`${BASE_URL}/person/${id}/combined_credits?api_key=${TMDB_KEY}&language=pt-BR`)
+            ]);
+            const bio = await rBio.json();
+            const credits = await rCredits.json();
+            
+            // Ordenar por popularidade e pegar top 20
+            const works = credits.cast.sort((a,b) => b.popularity - a.popularity).slice(0, 20);
+            let worksHtml = "";
+            works.forEach(w => {
+                 worksHtml += `<div class="filmography-item" onclick="abrirModal('${w.id}', '${w.media_type}')"><img src="${w.poster_path ? IMG_URL+w.poster_path : 'https://via.placeholder.com/100'}"></div>`;
+            });
+
+            c.innerHTML = `
+                <div style="padding:20px;">
+                    <button class="btn-back-modal" onclick="voltarFilme()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+                    <div class="person-view-header">
+                        <img src="${bio.profile_path?IMG_URL+bio.profile_path:'https://via.placeholder.com/100'}">
+                        <div><h2 style="margin:0">${bio.name}</h2><p style="color:#888">${bio.place_of_birth||''}</p></div>
+                    </div>
+                    <div class="person-bio" style="margin-top:20px; color:#ccc; line-height:1.6">${bio.biography||'Sem bio.'}</div>
+                    
+                    <h3 style="margin-top:30px; border-bottom:1px solid #333; padding-bottom:10px;">Outros trabalhos</h3>
+                    <div class="filmography-grid">${worksHtml}</div>
+                </div>`;
         } catch(e){ voltarFilme(); }
     }
     function voltarFilme() { document.getElementById('modalBody').innerHTML = backupModalFilme; document.getElementById('reviewsSection').style.display='block'; }
 
-    // --- DIARIO (COM SUB-ABAS) ---
+    // --- LISTAS ---
+    async function loadUserListsIntoMenu() {
+        if(isGuest) return;
+        const menu = document.getElementById('listMenu');
+        const { data: lists } = await supabase.from('user_lists').select('*').eq('user_id', currentUser.id);
+        
+        menu.innerHTML = `<div style="padding:10px; color:#888; font-size:0.8em; text-transform:uppercase">Suas Listas</div>`;
+        const { data: items } = await supabase.from('list_items').select('list_id').eq('tmdb_id', currentItem.id);
+        const inLists = new Set(items.map(i => i.list_id));
+
+        lists.forEach(l => {
+            const checked = inLists.has(l.id) ? 'fa-check-square' : 'fa-square';
+            const color = inLists.has(l.id) ? 'var(--accent)' : '#aaa';
+            menu.innerHTML += `
+                <div class="list-option-item" onclick="toggleListItem('${l.id}', this)">
+                    <span>${l.name}</span>
+                    <i class="fa-regular ${checked}" style="color:${color}"></i>
+                </div>`;
+        });
+        
+        menu.innerHTML += `
+            <div class="list-create-area">
+                <input type="text" class="new-list-input" placeholder="Nova lista..." id="newListInput">
+                <button class="new-list-btn" onclick="createListFromModal(document.getElementById('newListInput').value)"><i class="fa-solid fa-plus"></i></button>
+            </div>`;
+    }
+
+    function toggleListMenu() { const m=document.getElementById('listMenu'); m.style.display=m.style.display==='block'?'none':'block'; }
+    
+    async function toggleListItem(lid, el) {
+        const icon = el.querySelector('i');
+        if(icon.classList.contains('fa-check-square')) {
+            await supabase.from('list_items').delete().eq('list_id', lid).eq('tmdb_id', currentItem.id);
+            icon.className='fa-regular fa-square';
+            icon.style.color='#aaa';
+        } else {
+            await supabase.from('list_items').insert([{list_id:lid, tmdb_id:currentItem.id, media_type:currentItem.type, poster_path:currentItem.poster, title:currentItem.title}]);
+            icon.className='fa-regular fa-check-square';
+            icon.style.color='var(--accent)';
+        }
+    }
+
+    async function createListFromModal(n) { if(n) { await supabase.from('user_lists').insert([{user_id:currentUser.id, name:n}]); loadUserListsIntoMenu(); } }
+    async function createNewList() { const n = prompt("Nome:"); if(n) { await supabase.from('user_lists').insert([{user_id:currentUser.id, name:n}]); loadCustomListsTabs(); } }
+
+    async function loadCustomListsTabs() {
+        if(isGuest) return;
+        const { data } = await supabase.from('user_lists').select('*').eq('user_id', currentUser.id).eq('is_system', false);
+        const tabs = document.getElementById('listsTabs');
+        while(tabs.children.length > 3) tabs.removeChild(tabs.lastChild);
+        const add=document.createElement('button'); add.className='sub-tab-btn'; add.style.color='var(--accent)'; add.innerText='+ Criar'; add.onclick=createNewList;
+        data.forEach(l => { const b=document.createElement('button'); b.className='sub-tab-btn'; b.innerText=l.name; b.onclick=()=>loadUserList(l.id); tabs.appendChild(b); });
+        tabs.appendChild(add);
+    }
+
+    // --- DIARIO & LISTA DISPLAY ---
     function switchDiaryTab(type, btn) {
         document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         document.querySelectorAll('.diary-section-content').forEach(c => c.style.display = 'none');
-        
-        if (type === 'movies') {
-            document.getElementById('diary-movies-container').style.display = 'block';
-            document.getElementById('listContent').style.display = 'none'; // Esconde listas
-        } else if (type === 'series') {
-            document.getElementById('diary-series-container').style.display = 'block';
-            document.getElementById('listContent').style.display = 'none';
-        }
+        if(type === 'movies') { document.getElementById('diary-movies-container').style.display='block'; }
+        else if(type === 'series') { document.getElementById('diary-series-container').style.display='block'; }
     }
 
     async function loadDiary() {
         if(isGuest) return;
-        const cMovies = document.getElementById('diary-movies-container');
-        cMovies.innerHTML = "Carregando...";
-        
-        // Pega Filmes
+        const cM = document.getElementById('diary-movies-container'); cM.innerHTML="Carregando...";
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id).eq('media_type', 'movie').order('created_at',{ascending:false});
-        cMovies.innerHTML = "";
-        
-        if(!data || data.length === 0) cMovies.innerHTML = "<p style='color:#666'>Vazio.</p>";
+        cM.innerHTML = "";
+        if(!data.length) cM.innerHTML="<p style='color:#666'>Vazio.</p>";
         else {
             for(let i of data) {
                 const res = await fetch(`${BASE_URL}/movie/${i.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
                 const m = await res.json();
                 const dateStr = new Date(i.created_at).toLocaleDateString('pt-BR');
-                cMovies.innerHTML += `
-                    <div class="diary-item">
-                        <img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','movie')">
-                        <div class="diary-info">
-                            <div class="diary-date">${dateStr}</div>
-                            <div class="diary-title" onclick="abrirModal('${i.tmdb_id}','movie')">${m.title}</div>
-                            <div class="diary-meta">Filme • ${i.runtime}m</div>
-                        </div>
-                        <i class="fa-solid fa-trash diary-remove" onclick="toggleWatch('${i.tmdb_id}','movie',0,null);this.parentElement.remove()"></i>
-                    </div>`;
+                cM.innerHTML += `<div class="diary-item"><img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','movie')"><div class="diary-info"><div class="diary-date">${dateStr}</div><div class="diary-title">${m.title}</div><div class="diary-meta">Filme • ${i.runtime}m</div></div><i class="fa-solid fa-trash diary-remove" onclick="toggleWatch('${i.tmdb_id}','movie',0,null);this.parentElement.remove()"></i></div>`;
             }
         }
-        
-        loadDiarySeries(); // Carrega séries em background
-        switchDiaryTab('movies', document.querySelector('.sub-tab-btn')); // Ativa aba filmes
+        loadDiarySeries();
+        switchDiaryTab('movies', document.querySelector('.sub-tab-btn'));
     }
 
     async function loadDiarySeries() {
         if(isGuest) return;
-        const cSeries = document.getElementById('diary-series-container');
-        
-        // Pega Séries
+        const cS = document.getElementById('diary-series-container');
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id).eq('media_type', 'tv').order('created_at',{ascending:false});
-        cSeries.innerHTML = "";
+        cS.innerHTML = "";
+        if(!data.length) { cS.innerHTML="<p style='color:#666'>Vazio.</p>"; return; }
         
-        if(!data || data.length === 0) { cSeries.innerHTML = "<p style='color:#666'>Vazio.</p>"; return; }
-
         let seriesMap = {};
         for(let i of data) {
             if(!seriesMap[i.tmdb_id]) {
@@ -700,96 +731,25 @@
                 seriesMap[i.tmdb_id] = { meta: await res.json(), latest: i };
             } else {
                 const old = seriesMap[i.tmdb_id].latest;
-                if(i.season_number > old.season_number || (i.season_number == old.season_number && i.episode_number > old.episode_number)) {
-                    seriesMap[i.tmdb_id].latest = i;
-                }
+                if(i.season_number > old.season_number || (i.season_number == old.season_number && i.episode_number > old.episode_number)) seriesMap[i.tmdb_id].latest = i;
             }
         }
-
         for (const [id, val] of Object.entries(seriesMap)) {
-            const i = val.latest;
-            const m = val.meta;
-            const dateStr = new Date(i.created_at).toLocaleDateString('pt-BR');
-            cSeries.innerHTML += `
-                <div class="diary-item">
-                    <img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','tv')">
-                    <div class="diary-info">
-                        <div class="diary-date">Último: ${dateStr}</div>
-                        <div class="diary-title" onclick="abrirModal('${i.tmdb_id}','tv')">${m.name}</div>
-                        <div class="diary-meta" style="color:var(--gold)">Parou em: T${i.season_number} E${i.episode_number}</div>
-                    </div>
-                </div>`;
+            cS.innerHTML += `<div class="card" onclick="abrirModal('${id}', 'tv')"><img src="${IMG_URL+val.meta.poster_path}"><div class="rating-badge" style="bottom:0;top:auto;width:100%;text-align:center;background:rgba(0,0,0,0.8)">Parou: T${val.latest.season_number} E${val.latest.episode_number}</div></div>`;
         }
     }
 
-    // --- LISTAS ---
-    async function loadCustomListsTabs() {
-        if(isGuest) return;
-        const { data } = await supabase.from('user_lists').select('*').eq('user_id', currentUser.id).eq('is_system', false);
-        const tabs = document.getElementById('listsTabs');
-        while(tabs.children.length > 2) { tabs.removeChild(tabs.lastChild); } // Mantém Históricos e remove o resto pra recriar
-        
-        // Quero Ver
-        const qvBtn = document.createElement('button'); qvBtn.className='sub-tab-btn'; qvBtn.innerText='Quero Ver'; qvBtn.onclick=()=>loadUserList('quero-ver'); tabs.appendChild(qvBtn);
-
-        data.forEach(l => { const b=document.createElement('button'); b.className='sub-tab-btn'; b.innerText=l.name; b.onclick=()=>loadUserList(l.id); tabs.appendChild(b); });
-        const add=document.createElement('button'); add.className='sub-tab-btn'; add.style.color='var(--accent)'; add.innerText='+ Criar'; add.onclick=createNewList; tabs.appendChild(add);
-    }
-
-    async function loadUserList(listIdOrType) {
-        // Esconde conteudos de diario
+    async function loadUserList(lid) {
         document.querySelectorAll('.diary-section-content').forEach(c => c.style.display = 'none');
-        const container = document.getElementById('listContent');
-        container.style.display = 'grid'; // Grid para capas
-        container.innerHTML = "Carregando...";
-        
-        // Atualiza estilo das abas
-        document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-        // (Visual active state needs event target logic improvement but works functionally)
-
-        let query = supabase.from('list_items').select('*');
-        if(listIdOrType === 'quero-ver') {
-            const { data: list } = await supabase.from('user_lists').select('id').eq('user_id', currentUser.id).eq('is_system', true).single();
-            if(list) query = query.eq('list_id', list.id); else { container.innerHTML="Lista não encontrada"; return; }
-        } else query = query.eq('list_id', listIdOrType);
-        
-        const { data } = await query;
-        renderListItems(data, container);
+        const c = document.getElementById('listContent'); c.style.display='grid'; c.innerHTML="Carregando...";
+        let q = supabase.from('list_items').select('*');
+        if(lid==='quero-ver') { const {data:l} = await supabase.from('user_lists').select('id').eq('user_id',currentUser.id).eq('is_system',true).single(); q=q.eq('list_id',l.id); } 
+        else q=q.eq('list_id',lid);
+        const {data}=await q; 
+        c.innerHTML="";
+        if(!data.length) c.innerHTML="<p style='color:#666'>Vazio.</p>";
+        else data.forEach(i => c.innerHTML += `<div class="card" onclick="abrirModal('${i.tmdb_id}', '${i.media_type}')"><img src="${IMG_URL+i.poster_path}"><div class="rating-badge" style="bottom:0; top:auto; width:100%; text-align:center; background:rgba(0,0,0,0.7)">${i.title}</div></div>`);
     }
-
-    async function renderListItems(data, container) {
-        container.innerHTML = "";
-        if(!data || !data.length) { container.innerHTML = "<p style='color:#666'>Vazio.</p>"; return; }
-        for(let item of data) {
-            container.innerHTML += `<div class="card" onclick="abrirModal('${item.tmdb_id}', '${item.media_type}')"><img src="${IMG_URL+item.poster_path}"><div class="rating-badge" style="bottom:0; top:auto; width:100%; background:rgba(0,0,0,0.8)">${item.title}</div></div>`;
-        }
-    }
-
-    async function loadUserListsIntoMenu() {
-        if(isGuest) return;
-        const menu = document.getElementById('listMenu'); menu.innerHTML="";
-        const { data: lists } = await supabase.from('user_lists').select('*').eq('user_id', currentUser.id);
-        const { data: items } = await supabase.from('list_items').select('list_id').eq('tmdb_id', currentItem.id);
-        const inLists = new Set(items.map(i => i.list_id));
-        lists.forEach(l => {
-            const checked = inLists.has(l.id) ? 'fa-check-square' : 'fa-square';
-            menu.innerHTML += `<div class="list-option-item" onclick="toggleListItem('${l.id}', this)"><span>${l.name}</span><i class="fa-regular ${checked}"></i></div>`;
-        });
-        menu.innerHTML += `<div><input type="text" class="new-list-input" placeholder="Nova..." onkeypress="if(event.key==='Enter') createListFromModal(this.value)"></div>`;
-    }
-    function toggleListMenu() { const m=document.getElementById('listMenu'); m.style.display=m.style.display==='block'?'none':'block'; }
-    async function toggleListItem(lid, el) {
-        const icon = el.querySelector('i');
-        if(icon.classList.contains('fa-check-square')) {
-            await supabase.from('list_items').delete().eq('list_id', lid).eq('tmdb_id', currentItem.id);
-            icon.className='fa-regular fa-square';
-        } else {
-            await supabase.from('list_items').insert([{list_id:lid, tmdb_id:currentItem.id, media_type:currentItem.type, poster_path:currentItem.poster, title:currentItem.title}]);
-            icon.className='fa-regular fa-check-square';
-        }
-    }
-    async function createListFromModal(n){ if(n) { await supabase.from('user_lists').insert([{user_id:currentUser.id, name:n}]); loadUserListsIntoMenu(); } }
-    async function createNewList() { const n = prompt("Nome:"); if(n) { await supabase.from('user_lists').insert([{user_id:currentUser.id, name:n}]); loadCustomListsTabs(); } }
 
     // --- WATCHED DATE ---
     async function toggleWatch(id, type, runtime, btn, s=null, ep=null) {
@@ -821,7 +781,7 @@
     }
     function closeDateModal() { document.getElementById('dateModal').style.display = 'none'; }
 
-    // --- DETALHES DE STATS ---
+    // --- STATS ---
     async function openDetailedStats(type) {
         if(isGuest) return;
         document.getElementById('page-stats').classList.remove('active');
@@ -829,7 +789,6 @@
         const grid = document.getElementById('statsDetailGrid'); grid.innerHTML="Carregando...";
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id).eq('media_type', type).order('created_at', {ascending: false});
         grid.innerHTML="";
-        if(!data.length) { grid.innerHTML="<p>Vazio</p>"; return; }
         for(let item of data.slice(0,50)) {
              const res = await fetch(`${BASE_URL}/${type}/${item.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
              const m = await res.json();
@@ -838,7 +797,6 @@
         }
     }
     function closeDetailedStats() { document.getElementById('page-stats-details').classList.remove('active'); document.getElementById('page-stats').classList.add('active'); }
-    
     async function calculateStats() {
         if(isGuest) return;
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id);
@@ -874,15 +832,6 @@
         if(error) alert("Erro: " + error.message); else { document.getElementById('reviewText').value=""; setRate(0); loadReviews(); }
     }
     async function deleteReview(id) { if(confirm("Apagar?")) { await supabase.from('reviews').delete().eq('id', id); loadReviews(); } }
-
-    function selectAvatar(url) { document.getElementById('pf-avatar').value=url; updateProfilePreview(); }
-    function updateProfilePreview() { document.getElementById('profile-img-preview').src=document.getElementById('pf-avatar').value; document.getElementById('profile-cover-bg').style.backgroundImage=`url('${document.getElementById('pf-banner').value}')`; }
-    async function salvarPerfil() {
-        if(isGuest) return alert("Visitante não pode editar.");
-        const updates = { id: currentUser.id, username: document.getElementById('pf-name').value, avatar_url: document.getElementById('pf-avatar').value, banner_url: document.getElementById('pf-banner').value };
-        const { error } = await supabase.from('profiles').upsert(updates);
-        if(error) alert("Erro: " + error.message); else { alert("Salvo!"); window.location.reload(); }
-    }
 
     function fecharModal(e){if(e==='botao'||e.target.id==='modalDetalhes')document.getElementById('modalDetalhes').style.display='none'}
     async function buscar(){const t=document.getElementById('searchInput').value; const r=await fetch(`${BASE_URL}/search/multi?api_key=${TMDB_KEY}&language=pt-BR&query=${t}`); const d=await r.json(); const g=document.getElementById('gridBusca'); g.innerHTML=""; d.results.forEach(i=>{if(i.poster_path) g.innerHTML+=`<div class="card" onclick="abrirModal('${i.id}','${i.media_type}')"><img src="${IMG_URL+i.poster_path}"></div>`});}
