@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Os Cinéfilos</title>
     
-    <link rel="icon" href="https://img.icons8.com/color/48/movie-projector.png">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/860/860306.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#101010">
     
@@ -31,13 +31,19 @@
         .nav-item:hover, .nav-item.active { color: white; }
         .nav-item.active { border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
         .user-avatar-mini { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid #333; }
+        
+        /* Mobile Top Bar */
+        .mobile-logo-bar { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 60px; background: var(--nav-bg); z-index: 1001; align-items: center; justify-content: center; border-bottom: 1px solid #222; backdrop-filter: blur(10px); }
+        .mobile-logo { font-size: 1.2em; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .mobile-logo span { color: var(--accent); }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .page-section { display: none; animation: fadeUp 0.4s ease; }
         .page-section.active { display: block; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Login */
-        #auth-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 5000; display: flex; justify-content: center; align-items: center; flex-direction: column; background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=1000&q=80'); background-size: cover; }
+        #auth-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 5000; display: flex; justify-content: center; align-items: center; flex-direction: column; background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08737b/US-en-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg'); background-size: cover; }
         .auth-box { background: #1f1f1f; padding: 50px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
         .auth-box input { background: #111; border: 1px solid #444; padding: 15px; width: 100%; border-radius: 6px; margin-bottom: 15px; color: white; }
         .btn-main { width: 100%; padding: 15px; background: var(--accent); color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 6px; transition: 0.2s; }
@@ -58,6 +64,11 @@
         .card img { width: 100%; height: 240px; object-fit: cover; }
         .rating-badge { position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.8); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-size: 0.8em; font-weight: bold; backdrop-filter: blur(2px); }
 
+        /* NOVO: Cartão de Adicionar na Lista */
+        .add-card { border: 2px dashed #444; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666; transition: 0.3s; min-height: 240px; border-radius: 8px; cursor: pointer; background: transparent; }
+        .add-card:hover { border-color: var(--accent); color: var(--accent); background: #151515; }
+        .add-card i { font-size: 2em; margin-bottom: 10px; }
+
         /* Busca */
         .search-hero { margin: 30px auto; max-width: 600px; display: flex; gap: 10px; }
         input.search-input { flex-grow: 1; padding: 15px 20px; font-size: 1.1em; background: #222; border: 1px solid #333; color: white; border-radius: 50px; outline: none; }
@@ -74,8 +85,8 @@
         .sub-tab-btn { background: transparent; border: none; color: #666; font-size: 1.1em; font-weight: bold; cursor: pointer; padding: 5px 10px; transition: 0.3s; white-space: nowrap; }
         .sub-tab-btn:hover, .sub-tab-btn.active { color: white; border-bottom: 3px solid var(--accent); }
         
-        /* Modal Opções de Lista */
-        .list-options { display: none; position: absolute; background: #222; border: 1px solid #444; border-radius: 8px; padding: 0; z-index: 50; top: 100%; right: 0; min-width: 240px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; }
+        /* Modal Listas (Dropdown) */
+        .list-options { display: none; position: absolute; background: #222; border: 1px solid #444; border-radius: 8px; padding: 0; z-index: 50; top: 110%; right: 0; min-width: 240px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; }
         .list-option-item { padding: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
         .list-option-item:hover { background: #333; }
         .list-create-area { padding: 10px; background: #1a1a1a; display: flex; gap: 5px; }
@@ -95,6 +106,7 @@
 
         /* Stats */
         .metrics-split { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .metric-group h3 { border-bottom: 1px solid #333; padding-bottom: 10px; color: #aaa; font-size: 1em; text-transform: uppercase; letter-spacing: 1px; }
         .stat-box { background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: 0.2s; }
         .stat-box:hover { border-color: var(--accent); background: #222; }
         .stat-value { font-size: 2em; font-weight: 800; color: white; }
@@ -144,7 +156,10 @@
         
         .person-view-header { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 20px; }
         .person-view-header img { width: 120px; height: 180px; object-fit: cover; border-radius: 5px; }
-        .btn-back-modal { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-bottom: 10px; }
+        .btn-back-modal { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 5px; }
+        .filmography-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
+        .filmography-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .filmography-item img:hover { transform: scale(1.05); }
 
         /* Comentários */
         .reviews-section { padding: 30px; background: #111; border-top: 1px solid #222; }
@@ -177,7 +192,8 @@
 
         /* Mobile */
         @media (max-width: 768px) {
-            .navbar { top: auto; bottom: 0; height: 75px; padding: 10px 0 20px 0; justify-content: space-around; border-top: 1px solid #222; align-items: flex-start; }
+            body { padding-top: 60px; padding-bottom: 80px; }
+            .navbar { top: auto; bottom: 0; height: 75px; padding: 10px 0 20px 0; justify-content: space-around; border-top: 1px solid #222; align-items: flex-start; z-index: 2000; }
             .logo, .nav-links span { display: none; }
             .nav-links { width: 100%; justify-content: space-around; }
             .nav-item { flex-direction: column; font-size: 0.7em; }
@@ -187,10 +203,15 @@
             .metrics-split { grid-template-columns: 1fr; }
             .profile-edit-grid { grid-template-columns: 1fr; }
             .scroll-btn { display: none; }
+            .mobile-logo-bar { display: flex; } /* Mostra no mobile */
         }
     </style>
 </head>
 <body>
+
+    <div class="mobile-logo-bar">
+        <div class="mobile-logo">Os <span>Cinéfilos</span></div>
+    </div>
 
     <div id="auth-screen">
         <h1 style="text-transform: uppercase; letter-spacing: 3px; font-size: 2.5em; margin-bottom: 20px;">Os <span style="color:var(--accent)">Cinéfilos</span></h1>
@@ -213,7 +234,7 @@
                 <div class="nav-item" id="nav-lists" onclick="navegar('lists')"><i class="fa-solid fa-bookmark"></i> <span>Listas</span></div>
                 <div class="nav-item" id="nav-stats" onclick="navegar('stats')"><i class="fa-solid fa-chart-simple"></i> <span>Estatísticas</span></div>
                 <div class="nav-item" id="nav-profile" onclick="navegar('profile')">
-                    <img src="https://img.icons8.com/color/48/user-male-circle--v1.png" id="nav-avatar" class="user-avatar-mini">
+                    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" id="nav-avatar" class="user-avatar-mini">
                     <span id="nav-profile-name">Eu</span>
                 </div>
             </div>
@@ -261,20 +282,26 @@
             </div>
 
             <div id="page-search" class="page-section">
-                <div class="search-hero">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Digite o nome..." oninput="liveSearch()">
-                    <button class="search-btn-icon" onclick="buscar()"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
-                <div class="search-filters">
-                    <select id="filterType" class="filter-select" onchange="liveSearch()"><option value="multi">Tudo</option><option value="movie">Filmes</option><option value="tv">Séries</option></select>
-                    <select id="filterYear" class="filter-select" onchange="liveSearch()"><option value="">Ano</option><option value="2025">2025</option><option value="2024">2024</option><option value="old">Antigos</option></select>
+                <div class="search-container">
+                    <div class="search-hero">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Digite o nome..." oninput="liveSearch()">
+                        <button class="search-btn-icon" onclick="buscar()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <div class="search-filters">
+                        <select id="filterType" class="filter-select" onchange="liveSearch()"><option value="multi">Tudo</option><option value="movie">Filmes</option><option value="tv">Séries</option></select>
+                        <select id="filterYear" class="filter-select" onchange="liveSearch()"><option value="">Ano</option><option value="2025">2025</option><option value="2024">2024</option><option value="old">Antigos</option></select>
+                    </div>
                 </div>
                 <div class="grid" id="gridBusca"></div>
             </div>
 
             <div id="page-lists" class="page-section">
                 <h2>Minhas Coleções</h2>
-                <div class="sub-tabs" id="listsTabs"></div>
+                <div class="sub-tabs" id="listsTabs">
+                    <button class="sub-tab-btn active" onclick="switchDiaryTab('movies', this)">🎬 Filmes</button>
+                    <button class="sub-tab-btn" onclick="switchDiaryTab('series', this)">📺 Séries</button>
+                    <button class="sub-tab-btn" style="color:var(--accent)" onclick="createNewList()">+ Criar Lista</button>
+                </div>
                 <div id="diary-movies-container" class="diary-section-content active">Carregando filmes...</div>
                 <div id="diary-series-container" class="diary-section-content">Carregando séries...</div>
                 <div id="listContent" class="diary-section-content"></div>
@@ -338,10 +365,10 @@
                             <div class="form-group" style="grid-column: span 2;"><label>Avatar</label><input type="text" id="pf-avatar" onchange="updateProfilePreview()"></div>
                         </div>
                         <div class="avatar-options">
-                            <img src="https://img.icons8.com/color/48/user-male-circle--v1.png" class="avatar-opt" onclick="selectAvatar(this.src)">
-                            <img src="https://img.icons8.com/color/48/user-female-circle--v1.png" class="avatar-opt" onclick="selectAvatar(this.src)">
-                            <img src="https://img.icons8.com/color/48/c-3po.png" class="avatar-opt" onclick="selectAvatar(this.src)">
-                            <img src="https://img.icons8.com/color/48/darth-vader.png" class="avatar-opt" onclick="selectAvatar(this.src)">
+                            <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="avatar-opt" onclick="selectAvatar(this.src)">
+                            <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" class="avatar-opt" onclick="selectAvatar(this.src)">
+                            <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" class="avatar-opt" onclick="selectAvatar(this.src)">
+                            <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" class="avatar-opt" onclick="selectAvatar(this.src)">
                         </div>
                         <button class="btn-main" onclick="salvarPerfil()" style="margin-top:20px; width:200px;">SALVAR ALTERAÇÕES</button>
                         <button class="btn-guest" onclick="logout()" style="margin-top:10px; width:200px; color:#d32f2f; border:none;">Sair da Conta</button>
@@ -459,6 +486,7 @@
         document.getElementById('page-stats-details').classList.remove('active');
         if(p==='lists') loadDiary(); 
         if(p==='stats') calculateStats();
+        if(p==='search') document.getElementById('searchInput').focus();
     }
 
     // --- HOME ---
@@ -486,7 +514,6 @@
         const grid = document.getElementById('gridBusca');
         
         if(!termo) { grid.innerHTML=""; return; }
-        grid.innerHTML = "<p style='color:#666'>Buscando...</p>";
         let url = `${BASE_URL}/search/${type}?api_key=${TMDB_KEY}&language=pt-BR&query=${termo}`;
         if(year && year !== 'old') url += `&primary_release_year=${year}`;
 
@@ -497,7 +524,14 @@
         if(!data.results.length) grid.innerHTML = "<p style='padding:20px; color:#666'>Nada encontrado.</p>";
 
         data.results.forEach(i => {
-            if(i.poster_path) {
+            if (i.media_type === 'person' && i.known_for && i.known_for.length > 0) {
+                 i.known_for.forEach(k => {
+                     if(k.poster_path) {
+                         const tipoReal = k.media_type || (k.title ? 'movie' : 'tv');
+                         grid.innerHTML += `<div class="card" onclick="abrirModal('${k.id}','${tipoReal}')"><img src="${IMG_URL+k.poster_path}"><div class="rating-badge">★ ${k.vote_average.toFixed(1)}</div></div>`;
+                     }
+                 });
+            } else if(i.poster_path) {
                 const tipoReal = i.media_type || (i.title ? 'movie' : 'tv');
                 grid.innerHTML += `<div class="card" onclick="abrirModal('${i.id}','${tipoReal}')"><img src="${IMG_URL+i.poster_path}"><div class="rating-badge">★ ${i.vote_average.toFixed(1)}</div></div>`;
             }
@@ -553,7 +587,7 @@
                         <div class="action-row">
                             <span style="color:var(--gold); font-weight:bold">★ ${data.vote_average.toFixed(1)}</span>
                             ${eyeBtn}
-                            <div class="list-toggle" onclick="toggleListMenu()">
+                            <div class="list-toggle" onclick="toggleListMenu(event)">
                                 <i class="fa-solid fa-plus"></i> Minhas Listas
                                 <div class="list-options" id="listMenu"></div>
                             </div>
@@ -568,24 +602,17 @@
             document.getElementById('reviewTitle').innerText = "💬 Comentários (Geral)";
             document.getElementById('reviewsSection').style.display='block';
             loadReviews();
-            loadUserListsIntoMenu();
+            loadUserListsIntoMenu(); // Corrigido: Carrega lista no modal
         } catch (e) { body.innerHTML = "<p>Erro ao carregar.</p>"; }
     }
 
-    // --- LISTAS ---
+    // --- LISTAS (Corrigido) ---
     async function loadCustomListsTabs() {
         if(isGuest) return;
         const { data } = await supabase.from('user_lists').select('*').eq('user_id', currentUser.id).eq('is_system', false);
         const tabs = document.getElementById('listsTabs');
-        while(tabs.children.length > 0) { tabs.removeChild(tabs.lastChild); } // Limpa tudo
+        while(tabs.children.length > 2) { tabs.removeChild(tabs.lastChild); } // Mantém Históricos
         
-        // Botões padrão
-        tabs.innerHTML = `
-            <button class="sub-tab-btn active" onclick="switchDiaryTab('movies', this)">🎬 Filmes</button>
-            <button class="sub-tab-btn" onclick="switchDiaryTab('series', this)">📺 Séries</button>
-            <button class="sub-tab-btn" onclick="loadUserList('quero-ver')">Quero Ver</button>
-        `;
-
         data.forEach(l => {
             const btn = document.createElement('button');
             btn.className = 'sub-tab-btn';
@@ -605,45 +632,96 @@
     async function loadUserList(listIdOrType) {
         document.querySelectorAll('.diary-section-content').forEach(c => c.style.display = 'none');
         const container = document.getElementById('listContent');
-        container.style.display = 'grid'; // Grid para capas
+        container.style.display = 'grid'; 
         container.innerHTML = "Carregando...";
-        
-        let query = supabase.from('list_items').select('*');
-        if(listIdOrType === 'quero-ver') {
-            const { data: list } = await supabase.from('user_lists').select('id').eq('user_id', currentUser.id).eq('is_system', true).single();
-            if(list) query = query.eq('list_id', list.id); else { container.innerHTML="Lista não encontrada"; return; }
-        } else query = query.eq('list_id', listIdOrType);
-        
+        document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+
+        let query = supabase.from('list_items').select('*').eq('list_id', listIdOrType);
         const { data } = await query;
         renderListItems(data, container);
     }
 
     async function renderListItems(data, container) {
         container.innerHTML = "";
-        if(!data || !data.length) { container.innerHTML = "<p style='color:#666'>Vazio.</p>"; return; }
+        
+        // --- BOTÃO DE ADICIONAR (Estilo Novo Sutil) ---
+        container.innerHTML += `
+            <div class="add-card" onclick="goToSearch()">
+                <i class="fa-solid fa-plus"></i>
+                <span style="font-weight:bold; font-size:0.9em">Adicionar</span>
+            </div>`;
+
+        if(!data || !data.length) return;
+
         for(let item of data) {
             container.innerHTML += `<div class="card" onclick="abrirModal('${item.tmdb_id}', '${item.media_type}')"><img src="${IMG_URL+item.poster_path}"><div class="rating-badge" style="bottom:0; top:auto; width:100%; text-align:center; background:rgba(0,0,0,0.7)">${item.title}</div></div>`;
         }
     }
+    
+    function goToSearch() {
+        navegar('search');
+        document.getElementById('searchInput').focus();
+    }
 
+    // --- MENU LISTAS (Corrigido e Testado) ---
     async function loadUserListsIntoMenu() {
         if(isGuest) return;
-        const menu = document.getElementById('listMenu'); menu.innerHTML="";
+        const menu = document.getElementById('listMenu');
         const { data: lists } = await supabase.from('user_lists').select('*').eq('user_id', currentUser.id);
-        const { data: items } = await supabase.from('list_items').select('list_id').eq('tmdb_id', currentItem.id);
-        const inLists = new Set(items.map(i => i.list_id));
-        lists.forEach(l => {
-            const checked = inLists.has(l.id) ? 'fa-check-square' : 'fa-square';
-            const color = inLists.has(l.id) ? 'var(--accent)' : '#aaa';
-            menu.innerHTML += `<div class="list-option-item" onclick="toggleListItem('${l.id}', this)"><span>${l.name}</span><i class="fa-regular ${checked}" style="color:${color}"></i></div>`;
-        });
-        menu.innerHTML += `<div class="list-create-area"><input type="text" class="new-list-input" placeholder="Nova lista..." id="newListInput"><button class="new-list-btn" onclick="createListFromModal(document.getElementById('newListInput').value)"><i class="fa-solid fa-plus"></i></button></div>`;
+        
+        menu.innerHTML = "";
+        
+        // Se houver item atual, checa status
+        let inLists = new Set();
+        if(currentItem && currentItem.id) {
+            const { data: items } = await supabase.from('list_items').select('list_id').eq('tmdb_id', currentItem.id);
+            if(items) inLists = new Set(items.map(i => i.list_id));
+        }
+
+        if(lists) {
+            lists.forEach(l => {
+                const checked = inLists.has(l.id) ? 'fa-check-square' : 'fa-square';
+                const color = inLists.has(l.id) ? 'var(--accent)' : '#aaa';
+                menu.innerHTML += `
+                    <div class="list-option-item" onclick="toggleListItem('${l.id}', this)">
+                        <span>${l.name}</span>
+                        <i class="fa-regular ${checked}" style="color:${color}"></i>
+                    </div>`;
+            });
+        }
+        
+        menu.innerHTML += `
+            <div class="list-create-area">
+                <input type="text" class="new-list-input" placeholder="Nova lista..." id="newListInput" onclick="event.stopPropagation()">
+                <button class="new-list-btn" onclick="createListFromModal(document.getElementById('newListInput').value); event.stopPropagation();"><i class="fa-solid fa-plus"></i></button>
+            </div>`;
     }
-    function toggleListMenu() { const m=document.getElementById('listMenu'); m.style.display=m.style.display==='block'?'none':'block'; }
+
+    function toggleListMenu(e) {
+        if(e) e.stopPropagation();
+        const menu = document.getElementById('listMenu');
+        
+        // Se estiver fechado, abre e carrega. Se aberto, fecha.
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+            loadUserListsIntoMenu(); // Recarrega status ao abrir
+        }
+    }
     
+    window.onclick = function(event) {
+        if (!event.target.closest('.list-toggle')) {
+            const m = document.getElementById('listMenu');
+            if (m && m.style.display === 'block') m.style.display = 'none';
+        }
+    }
+
     async function toggleListItem(lid, el) {
+        if(isGuest) return alert("Faça login");
         const icon = el.querySelector('i');
-        if(icon.classList.contains('fa-check-square')) {
+        const isAdded = icon.classList.contains('fa-check-square');
+        if(isAdded) {
             await supabase.from('list_items').delete().eq('list_id', lid).eq('tmdb_id', currentItem.id);
             icon.className='fa-regular fa-square'; icon.style.color='#aaa';
         } else {
@@ -652,12 +730,23 @@
         }
     }
 
-    async function createListFromModal(n) { if(n) { if(isGuest) return alert("Login necessário"); await supabase.from('user_lists').insert([{user_id:currentUser.id, name:n}]); loadUserListsIntoMenu(); } }
-    async function createNewList() { if(isGuest) return alert("Login necessário"); const n = prompt("Nome da nova lista:"); if(n) { await supabase.from('user_lists').insert([{user_id:currentUser.id, name:n}]); loadCustomListsTabs(); } }
+    async function createListFromModal(n) {
+        if(!n) return;
+        if(isGuest) return alert("Faça login");
+        await supabase.from('user_lists').insert([{ user_id: currentUser.id, name: n }]);
+        loadUserListsIntoMenu(); // Recarrega o menu aberto
+    }
+    async function createNewList() {
+        const name = prompt("Nome da nova lista:");
+        if(name) {
+            await supabase.from('user_lists').insert([{ user_id: currentUser.id, name: name }]);
+            loadCustomListsTabs();
+        }
+    }
 
     // --- WATCHED DATE ---
     async function toggleWatch(id, type, runtime, btn, s=null, ep=null) {
-        if(isGuest) return alert("Faça login.");
+        if(isGuest) return alert("Faça login para salvar.");
         const key = type==='movie' ? `${id}_m` : `${id}_tv_${s}_${ep}`;
         if(watchedSet.has(key)) {
             watchedSet.delete(key);
@@ -683,7 +772,7 @@
         if(btn && type==='movie') { btn.classList.add('active'); btn.innerHTML = '<i class="fa-solid fa-eye"></i> Visto'; }
         closeDateModal();
     }
-    function closeDateModal() { document.getElementById('dateModal').style.display = 'none'; }
+    function closeDateModal() { document.getElementById('dateModal').style.display = 'none'; pendingWatchAction = null; }
 
     // --- SÉRIES LÓGICA ---
     async function loadSeason(tvId, s) {
@@ -691,7 +780,6 @@
         const icon = div.previousElementSibling.querySelector('.season-btn i');
         if(div.style.display==='block'){div.style.display='none'; if(icon) icon.className='fa-solid fa-chevron-down'; return;}
         div.style.display='block'; if(icon) icon.className='fa-solid fa-chevron-up';
-        
         div.innerHTML="<p style='padding:10px;color:#666'>Carregando...</p>";
         const res = await fetch(`${BASE_URL}/tv/${tvId}/season/${s}?api_key=${TMDB_KEY}&language=pt-BR`);
         const data = await res.json();
@@ -716,7 +804,7 @@
         }
     }
 
-    // --- BIO ---
+    // --- BIO & FILMOGRAFIA ---
     async function verPessoa(id) {
         const c = document.getElementById('modalBody');
         c.innerHTML = "<p style='padding:30px'>Carregando bio...</p>";
@@ -726,23 +814,20 @@
                 fetch(`${BASE_URL}/person/${id}?api_key=${TMDB_KEY}&language=pt-BR`),
                 fetch(`${BASE_URL}/person/${id}/combined_credits?api_key=${TMDB_KEY}&language=pt-BR`)
             ]);
-            const bio = await rBio.json();
+            const d = await rBio.json();
             const credits = await rCredits.json();
-            
-            // Ordena trabalhos por popularidade
             const works = credits.cast.sort((a,b) => b.popularity - a.popularity).slice(0, 18);
-            let worksHtml = `<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap:10px; margin-top:20px;">`;
+            let worksHtml = `<div class="filmography-grid">`;
             works.forEach(w => {
-                 worksHtml += `<div onclick="abrirModal('${w.id}', '${w.media_type}')" style="cursor:pointer"><img src="${w.poster_path ? IMG_URL+w.poster_path : 'https://via.placeholder.com/100'}" style="width:100%; border-radius:4px;"></div>`;
+                 worksHtml += `<div class="filmography-item" onclick="abrirModal('${w.id}', '${w.media_type}')"><img src="${w.poster_path ? IMG_URL+w.poster_path : 'https://via.placeholder.com/100'}"></div>`;
             });
             worksHtml += `</div>`;
-
-            c.innerHTML = `<div style="padding:20px;"><button class="btn-back-modal" onclick="voltarFilme()"><i class="fa-solid fa-arrow-left"></i> Voltar</button><div class="person-view-header"><img src="${bio.profile_path?IMG_URL+bio.profile_path:'https://via.placeholder.com/100'}" style="width:120px; border-radius:50%"><div><h2 style="margin:0">${bio.name}</h2><p style="color:#888">${bio.place_of_birth||''}</p></div></div><div class="person-bio" style="margin-top:20px; color:#ccc; line-height:1.6">${bio.biography||'Biografia indisponível.'}</div><h3 style="margin-top:30px;border-bottom:1px solid #333;padding-bottom:10px">Outros Trabalhos</h3>${worksHtml}</div>`;
+            c.innerHTML = `<div style="padding:20px;"><button class="btn-back-modal" onclick="voltarFilme()"><i class="fa-solid fa-arrow-left"></i> Voltar</button><div class="person-view-header"><img src="${d.profile_path?IMG_URL+d.profile_path:'https://via.placeholder.com/100'}" style="width:120px; border-radius:50%"><div><h2 style="margin:0">${d.name}</h2><p style="color:#888">${d.place_of_birth||''}</p></div></div><div class="person-bio" style="margin-top:20px; color:#ccc; line-height:1.6">${d.biography||'Biografia indisponível.'}</div><h3 style="margin-top:30px;border-bottom:1px solid #333;padding-bottom:10px">Outros Trabalhos</h3>${worksHtml}</div>`;
         } catch(e){ voltarFilme(); }
     }
     function voltarFilme() { document.getElementById('modalBody').innerHTML = backupModalFilme; document.getElementById('reviewsSection').style.display='block'; }
 
-    // --- DIARIO (COM SUB-ABAS) ---
+    // --- DIARIO (AGRUPADO) ---
     function switchDiaryTab(type, btn) {
         document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -750,7 +835,6 @@
         if (type === 'movies') { document.getElementById('diary-movies-container').style.display = 'block'; document.getElementById('listContent').style.display = 'none'; } 
         else if (type === 'series') { document.getElementById('diary-series-container').style.display = 'block'; document.getElementById('listContent').style.display = 'none'; }
     }
-
     async function loadDiary() {
         if(isGuest) return;
         const cMovies = document.getElementById('diary-movies-container');
@@ -758,25 +842,39 @@
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id).eq('media_type', 'movie').order('created_at',{ascending:false});
         cMovies.innerHTML = "";
         
-        if(!data || data.length === 0) cMovies.innerHTML = "<p style='color:#666'>Vazio.</p>";
-        else {
+        // --- BOTÃO ADICIONAR NO HISTÓRICO ---
+        cMovies.innerHTML += `<div class="diary-item" style="border:2px dashed #333; justify-content:center; cursor:pointer;" onclick="goToSearch()"><i class="fa-solid fa-plus"></i> <span style="font-weight:bold; margin-left:10px">Adicionar Filme</span></div>`;
+
+        if(data && data.length > 0) {
             for(let i of data) {
                 const res = await fetch(`${BASE_URL}/movie/${i.tmdb_id}?api_key=${TMDB_KEY}&language=pt-BR`);
                 const m = await res.json();
                 const dateStr = new Date(i.created_at).toLocaleDateString('pt-BR');
-                cMovies.innerHTML += `<div class="diary-item"><img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','movie')"><div class="diary-info"><div class="diary-date">${dateStr}</div><div class="diary-title" onclick="abrirModal('${i.tmdb_id}','movie')">${m.title}</div><div class="diary-meta">Filme • ${i.runtime}m</div></div><i class="fa-solid fa-trash diary-remove" onclick="toggleWatch('${i.tmdb_id}','movie',0,null);this.parentElement.remove()"></i></div>`;
+                cMovies.innerHTML += `
+                    <div class="diary-item">
+                        <img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','movie')">
+                        <div class="diary-info">
+                            <div class="diary-date">${dateStr}</div>
+                            <div class="diary-title" onclick="abrirModal('${i.tmdb_id}','movie')">${m.title}</div>
+                            <div class="diary-meta">Filme • ${i.runtime}m</div>
+                        </div>
+                        <i class="fa-solid fa-trash diary-remove" onclick="toggleWatch('${i.tmdb_id}','movie',0,null);this.parentElement.remove()"></i>
+                    </div>`;
             }
         }
         loadDiarySeries();
         switchDiaryTab('movies', document.querySelector('.sub-tab-btn'));
     }
-
     async function loadDiarySeries() {
         if(isGuest) return;
         const cSeries = document.getElementById('diary-series-container');
         const { data } = await supabase.from('watched').select('*').eq('user_id', currentUser.id).eq('media_type', 'tv').order('created_at',{ascending:false});
         cSeries.innerHTML = "";
-        if(!data.length) { cSeries.innerHTML="<p style='color:#666'>Vazio.</p>"; return; }
+        
+        // --- BOTÃO ADICIONAR NA SÉRIE ---
+        cSeries.innerHTML += `<div class="diary-item" style="border:2px dashed #333; justify-content:center; cursor:pointer;" onclick="goToSearch()"><i class="fa-solid fa-plus"></i> <span style="font-weight:bold; margin-left:10px">Adicionar Série</span></div>`;
+
+        if(!data.length) return;
 
         let seriesMap = {};
         for(let i of data) {
@@ -794,7 +892,15 @@
             const i = val.latest;
             const m = val.meta;
             const dateStr = new Date(i.created_at).toLocaleDateString('pt-BR');
-            cSeries.innerHTML += `<div class="diary-item"><img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','tv')"><div class="diary-info"><div class="diary-date">Último: ${dateStr}</div><div class="diary-title" onclick="abrirModal('${i.tmdb_id}','tv')">${m.name}</div><div class="diary-meta" style="color:var(--gold)">Parou em: T${i.season_number} E${i.episode_number}</div></div></div>`;
+            cSeries.innerHTML += `
+                <div class="diary-item">
+                    <img src="${IMG_URL+m.poster_path}" class="diary-poster" onclick="abrirModal('${i.tmdb_id}','tv')">
+                    <div class="diary-info">
+                        <div class="diary-date">Último: ${dateStr}</div>
+                        <div class="diary-title" onclick="abrirModal('${i.tmdb_id}','tv')">${m.name}</div>
+                        <div class="diary-meta" style="color:var(--gold)">Parou em: T${i.season_number} E${i.episode_number}</div>
+                    </div>
+                </div>`;
         }
     }
 
